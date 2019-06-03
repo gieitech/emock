@@ -31,6 +31,10 @@ class Quiz(models.Model):
     def questions(self):
         return self.question_set.all()
 
+    @property
+    def no_of_questions(self):
+        return self.question_set.count()
+
 
 class Question(models.Model):
     quiz = models.ForeignKey(Quiz , on_delete=models.CASCADE)
@@ -66,4 +70,11 @@ class Report(models.Model):
 
     students = models.ForeignKey(Student , on_delete=models.CASCADE)
     quiz = models.ForeignKey(Quiz , on_delete=models.CASCADE)
+    answered = models.IntegerField()
+    correct = models.IntegerField()
+
+    def un_answered(self):
+        return self.quiz.no_of_questions() - self.answered
     
+    def incorrect(self):
+        return self.answered - self.correct

@@ -35,6 +35,13 @@ class QuestionListCreate(ListCreateAPIView):
 
 class GenerateReport(APIView):
 
+
+    def get(self, request):
+        quiz = Quiz.objects.get(pk=self.kwargs.get('quiz_id'))
+        serializer = QuizSerializer(quiz)
+        return Response({"quiz" : serializer.data})
+
+
     def post(self,request):
         print(self.kwargs.get('quiz_id'))
         return Response({'response':'response'})
