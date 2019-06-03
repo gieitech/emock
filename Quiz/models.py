@@ -53,6 +53,22 @@ class Question(models.Model):
     def options(self):
         return self.option_set.all().order_by("?")
 
+
+    @property
+    def isMultipleCorrect(self):
+        correctOptions = self.option_set.filter(isCorrect=True)
+        if correctOptions.count() > 1:
+            return True
+        return False
+
+    
+    def correctAnswer(self):
+        if not self.isMultipleCorrect : 
+            return self.option_set.get(isCorrect=True)
+        return self.option_set.filter(isCorrect=True)
+        
+
+        
         
 class Option(models.Model):
 
@@ -68,10 +84,11 @@ class Option(models.Model):
 
 class Report(models.Model):
 
-    students = models.ForeignKey(Student , on_delete=models.CASCADE)
+    student = models.ForeignKey(Student , on_delete=models.CASCADE)
     quiz = models.ForeignKey(Quiz , on_delete=models.CASCADE)
     answered = models.IntegerField()
     correct = models.IntegerField()
+    gained_marks = models.IntegerField()
 
     def un_answered(self):
         return self.quiz.no_of_questions() - self.answered

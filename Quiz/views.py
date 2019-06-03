@@ -44,5 +44,25 @@ class GenerateReport(APIView):
 
     def post(self,request,quiz_id):
         
-        print(request)
-        return Response({'response':str(request.data)})
+        
+        answered = len(request.data)
+        correct = 0
+        marks_gained = 0
+        quiz = Quiz.objects.get(pk=quiz_id)
+        total = quiz.no_of_questions
+        un_answered = total - answered 
+
+        for i in request.data:
+            question = Question.objects.get(pk=i['question'])
+            if not question.isMultipleCorrect:
+                option_input = Option.objects.get(pk=i['option'])
+                option_saved = question.correctAnswer()
+                if option_input == option_saved:
+                    correct += 1;
+                    marks_gained += question.marks
+            else:
+                pass
+
+        incorrect = answered - correct
+
+        return Response({'correct': correct ,'incorrect':incorrect ,'answered': answered , 'un_answered' : un_answered , 'score':marks_gained})

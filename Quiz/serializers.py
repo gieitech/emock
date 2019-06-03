@@ -1,4 +1,8 @@
-from rest_framework.serializers import ModelSerializer
+from rest_framework.serializers import (
+    ModelSerializer,
+    CharField,
+    BooleanField,
+)
 from .models import *
 
 class OptionSerializer(ModelSerializer):
@@ -10,6 +14,8 @@ class OptionSerializer(ModelSerializer):
 
 class QuestionSerializer(ModelSerializer):
     options = OptionSerializer(many=True)
+    isMultipleCorrect = BooleanField()
+    
     class Meta:
         model = Question
         fields = '__all__'
