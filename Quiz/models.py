@@ -1,4 +1,5 @@
 from django.db import models
+from Accounts.models import Student
 
 # Create your models here.
 class Quiz(models.Model):
@@ -57,3 +58,12 @@ class Option(models.Model):
 
     def __str__(self):
         return self.option_text
+
+
+
+
+class Report(models.Model):
+
+    students = models.ForeignKey(Student , on_delete=models.CASCADE)
+    quiz = models.ForeignKey(Quiz , on_delete=models.CASCADE)
+    
