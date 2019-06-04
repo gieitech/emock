@@ -20,5 +20,5 @@ class OptionInline(admin.TabularInline):
 class QuestionAdmin(admin.ModelAdmin):
     inlines = [OptionInline,]
     list_display = ('question_text','marks')
-
+admin.site.register(Report)
 admin.site.register(Question, QuestionAdmin)

@@ -31,7 +31,7 @@ class QuizSerializer(ModelSerializer):
 
 
 class ReportSerializer(ModelSerializer):
-
+    quiz = QuizSerializer()
     class Meta:
         model = Report
         fields = '__all__'

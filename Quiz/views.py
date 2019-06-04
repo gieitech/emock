@@ -68,7 +68,22 @@ class GenerateReport(APIView):
             student=student,
             quiz=quiz,
             answered=answered,
+            correct=correct,
             gained_marks=marks_gained,
         )
+
         serializer = ReportSerializer(report)
-        return Response({'data':serializer.data},status=status.HTTP_201_CREATED)
+        return Response(serializer.data,status=status.HTTP_201_CREATED)
+
+
+
+
+class ReportListView(ListCreateAPIView):
+
+    queryset = Report.objects.all()
+    serializer_class = ReportSerializer
+
+    def get_queryset(self):
+        student = Student.objects.get(pk=self.kwargs.get('student_pk'))
+        return self.queryset.filter(student=student)
+    

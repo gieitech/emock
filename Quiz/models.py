@@ -90,8 +90,15 @@ class Report(models.Model):
     correct = models.IntegerField()
     gained_marks = models.IntegerField()
 
+    submission_date = models.DateField(auto_now_add=True)
+    submission_time = models.TimeField(auto_now_add=True)
+
     def un_answered(self):
         return self.quiz.no_of_questions() - self.answered
     
     def incorrect(self):
         return self.answered - self.correct
+
+
+    def __str__(self):
+        return str(self.student)+" , "+str(self.quiz)

@@ -35,4 +35,4 @@ class StudentFromToken(APIView):
         student = Student.objects.get(user=user)
         serializer = StudentSerializer(student)
 
-        return Response({ 'student': serializer.data } , status = status.HTTP_200_OK)
+        return Response(serializer.data , status = status.HTTP_200_OK)
