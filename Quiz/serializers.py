@@ -2,6 +2,7 @@ from rest_framework.serializers import (
     ModelSerializer,
     CharField,
     BooleanField,
+    IntegerField,
 )
 from .models import *
 
@@ -23,7 +24,7 @@ class QuestionSerializer(ModelSerializer):
 
 
 class QuizSerializer(ModelSerializer):
-    
+    no_of_questions = IntegerField()
     class Meta:
         model = Quiz
         fields = '__all__'
