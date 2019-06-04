@@ -26,3 +26,13 @@ class TokenToUser(APIView):
         return Response(serializer.data , status=status.HTTP_200_OK)
 
         
+class StudentFromToken(APIView):
+
+    def post(self , request):
+        token_rcv = request.data['token']
+        token = Token.objects.get(key=token_rcv)
+        user = User.objects.get(pk=token.user_id)
+        student = Student.objects.get(user=user)
+        serializer = StudentSerializer(student)
+
+        return Response({ 'student': serializer.data } , status = status.HTTP_200_OK)

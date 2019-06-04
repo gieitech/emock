@@ -27,3 +27,11 @@ class QuizSerializer(ModelSerializer):
     class Meta:
         model = Quiz
         fields = '__all__'
+
+
+
+class ReportSerializer(ModelSerializer):
+
+    class Meta:
+        model = Report
+        fields = '__all__'
