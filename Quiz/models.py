@@ -20,6 +20,7 @@ class Quiz(models.Model):
 
     class Meta:
         verbose_name_plural = 'Quizzes'
+        ordering = ('-pub_date',)
 
     def full_marks(self):
         marks = 0
@@ -99,6 +100,8 @@ class Report(models.Model):
     def incorrect(self):
         return self.answered - self.correct
 
+    class Meta:
+        ordering = ('-submission_date',)
 
     def __str__(self):
         return str(self.student)+" , "+str(self.quiz)
