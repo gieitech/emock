@@ -24,9 +24,9 @@ STATIC_DIR = os.path.join(BASE_DIR, 'static')
 SECRET_KEY = 'm)!tdc!n0fv()h02_4u4@=qx!7ph_lwhie@15ygwglv$!mgq1l'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-# ALLOWED_HOSTS = ['galaxyguidecenter.pythonanywhere.com']
+ALLOWED_HOSTS = ['galaxyguidecenter.pythonanywhere.com']
 
 
 # Application definition
