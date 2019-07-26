@@ -24,9 +24,9 @@ STATIC_DIR = os.path.join(BASE_DIR, 'static')
 SECRET_KEY = 'm)!tdc!n0fv()h02_4u4@=qx!7ph_lwhie@15ygwglv$!mgq1l'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
-ALLOWED_HOSTS = ['galaxyguidecenter.pythonanywhere.com']
+# ALLOWED_HOSTS = ['galaxyguidecenter.pythonanywhere.com']
 
 
 # Application definition
@@ -139,5 +139,6 @@ STATICFILES_DIRS = [
 
 CORS_ORIGIN_WHITELIST = [
     "http://localhost:3000",
+    "https://galaxyguidecenter.pythonanywhere.com",
     
 ]
