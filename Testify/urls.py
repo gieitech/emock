@@ -21,6 +21,7 @@ admin.site.site_header = 'Testify Admin'
 
 urlpatterns = [
 
+    path('',include('Website.urls')),
     path('accounts/',include('Accounts.urls')),
     path('admin/', admin.site.urls),
     path('quiz/' , include('Quiz.urls' , namespace='Quiz')),

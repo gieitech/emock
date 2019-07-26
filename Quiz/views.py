@@ -8,8 +8,8 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from .serializers import *
 from .models import *
-
-
+from django.views.generic import TemplateView
+from Website.models import Brand
 # Create your views here.
 class QuizListCreate(ListCreateAPIView):
 
@@ -86,4 +86,15 @@ class ReportListView(ListCreateAPIView):
     def get_queryset(self):
         student = Student.objects.get(pk=self.kwargs.get('student_pk'))
         return self.queryset.filter(student=student)
+    
+
+
+# examination page
+class ExaminationView(TemplateView):
+    template_name ='Quiz/index.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["brand"] = Brand.objects.get(id=1)
+        return context
     
