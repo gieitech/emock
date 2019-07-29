@@ -252,7 +252,11 @@
 									</p>
 									<h3><a href="#">{{quiz.name}}</a></h3>
 									<p>{{quiz.syllabus}}</p>
-									<p><a href="#" class="btn btn-primary">Apply now</a></p>
+									{% if request.user.is_authenticated %}
+                                        <p><a href="{% url 'Quiz:quiz-web-detail' pk=quiz.pk %}" class="btn btn-primary">Take This Test</a></p>
+                                    {% else %}
+									    <p><a href="{% url 'Quiz:quiz-web-detail' pk=quiz.id %}" class="btn btn-primary">Login to start</a></p>
+                                    {% endif %}
 								</div>
 							</div>
 						{% endfor %}

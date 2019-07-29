@@ -1,4 +1,7 @@
-from rest_framework.serializers import ModelSerializer
+from rest_framework.serializers import (
+    ModelSerializer,
+    CharField,
+)
 from .models import *
 from django.contrib.auth.models import User , Group
 from rest_framework.authtoken.models import Token
@@ -17,6 +20,7 @@ class UserSerializer(ModelSerializer):
 
 
 class StudentSerializer(ModelSerializer):
+    full_name = CharField()
     user = UserSerializer()
     class Meta:
         model = Student

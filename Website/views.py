@@ -10,7 +10,7 @@ class HomeView(TemplateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context["brand"] = Brand.objects.get(id=1)
-        context['quizzes'] = Quiz.objects.all().order_by("?")[:4]
+        context['quizzes'] = Quiz.objects.filter(isActive=True).order_by("?")[:4]
         context['members'] = Member.objects.filter(brand__id=1)
         return context
     

@@ -22,6 +22,7 @@ class Quiz(models.Model):
         verbose_name_plural = 'Quizzes'
         ordering = ('-pub_date',)
 
+    @property
     def full_marks(self):
         marks = 0
         for question in self.question_set.all():

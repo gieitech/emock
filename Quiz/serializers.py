@@ -25,6 +25,7 @@ class QuestionSerializer(ModelSerializer):
 
 class QuizSerializer(ModelSerializer):
     no_of_questions = IntegerField()
+    full_marks = IntegerField()
     class Meta:
         model = Quiz
         fields = '__all__'

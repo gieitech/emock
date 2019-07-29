@@ -1,0 +1,148 @@
+{% extends 'Base.html' %}
+{% load static %}
+{% load widget_tweaks %}
+{% block title %}
+	<title>Register To  | {{brand.full_name}}</title>
+{% endblock %}
+
+
+{% block content %}
+    
+    <section class="hero-wrap hero-wrap-2" style="background-image: url({{brand.random_hero_image}});">
+      <div class="overlay"></div>
+      <div class="container">
+        <div class="row no-gutters slider-text align-items-center justify-content-center">
+          <div class="col-md-9 ftco-animate text-center">
+            <h1 class="mb-2 bread">Register To {{brand.full_name}}</h1>
+            <p class="breadcrumbs"><span class="mr-2"><a href="{% url 'Website:home' %}">Home <i class="ion-ios-arrow-forward"></i></a></span> <span>Register <i class="ion-ios-arrow-forward"></i></span></p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    
+		
+		<section class="ftco-section ftco-no-pt ftco-no-pb contact-section">
+			<div class="container">
+				<div class="row d-flex align-items-stretch no-gutters">
+					<div class="col-md-6 p-4 p-md-5 order-md-last bg-light">
+						<form method='POST'>
+              {% csrf_token %}
+              <div class="form-group">
+                {{form.first_name.label_tag}}
+                {{form.first_name|attr:'class:form-control'|attr:'placeholder:First Name'}}
+                {% if form.first_name.errors %}
+                    <div class='alert alert-danger'>
+                        {{form.first_name.errors}}
+                    </div>
+                {% endif %}
+              </div>
+              <div class="form-group">
+                {{form.middle_name.label_tag}}
+                {{form.middle_name|attr:'class:form-control'|attr:'placeholder:Middle Name'}}
+              </div>
+              <div class="form-group">
+                {{form.last_name.label_tag}}
+                {{form.last_name|attr:'class:form-control'|attr:'placeholder:Last Name'}}
+                {% if form.last_name.errors %}
+                    <div class='alert alert-danger'>
+                        {{form.last_name.errors}}
+                    </div>
+                {% endif %}
+              </div>
+              <div class="form-group">
+                {{form.username.label_tag}}
+                {{form.username|attr:'class:form-control'|attr:'placeholder:Username'}}
+                {% if form.username.errors %}
+                    <div class='alert alert-danger'>
+                        {{form.username.errors}}
+                    </div>
+                {% endif %}
+              </div>
+               <div class="form-group">
+                {{form.email.label_tag}}
+                {{form.email|attr:'class:form-control'|attr:'placeholder:Email'}}
+                {% if form.email.errors %}
+                    <div class='alert alert-danger'>
+                        {{form.email.errors}}
+                    </div>
+                {% endif %}
+              </div>
+               <div class="form-group">
+                {{form.contact_number.label_tag}}
+                {{form.contact_number|attr:'class:form-control'|attr:'placeholder:Contact Number'}}
+                {% if form.contact_number.errors %}
+                    <div class='alert alert-danger'>
+                        {{form.contact_number.errors}}
+                    </div>
+                {% endif %}
+              </div>
+              <div class="form-group">
+                {{form.address.label_tag}}
+                {{form.address|attr:'class:form-control'|attr:'placeholder:Address'}}
+                {% if form.address.errors %}
+                    <div class='alert alert-danger'>
+                        {{form.address.errors}}
+                    </div>
+                {% endif %}
+              </div>
+              <div class="form-group">
+                {{form.date_of_birth.label_tag}}
+                {{form.date_of_birth|attr:'class:form-control'|attr:'placeholder:YYYY-MM-DD format'|attr:'type:date'}}
+                {% if form.date_of_birth.errors %}
+                    <div class='alert alert-danger'>
+                        {{form.date_of_birth.errors}}
+                    </div>
+                {% endif %}
+              </div>
+              <div class="form-group">
+                {{form.display_image_url.label_tag}}
+                {{form.display_image_url|attr:'class:form-control'|attr:'placeholder:Paste Your Image Link Here'}}
+                {% if form.display_image_url.errors %}
+                    <div class='alert alert-danger'>
+                        {{form.display_image_url.errors}}
+                    </div>
+                {% endif %}
+              </div>
+              <div class="form-group">
+                {{form.about.label_tag}}
+                {{form.about|attr:'class:form-control'|attr:'placeholder:Little bit about yourself'}}
+                {% if form.about.errors %}
+                    <div class='alert alert-danger'>
+                        {{form.about.errors}}
+                    </div>
+                {% endif %}
+              </div>
+              <div class="form-group">
+                {{form.password.label_tag}}
+                {{form.password|attr:'class:form-control'|attr:'placeholder:Password'}}
+                {% if form.password.errors %}
+                    <div class='alert alert-danger'>
+                        {{form.password.errors}}
+                    </div>
+                {% endif %}
+              </div>
+              <div class="form-group">
+                {{form.re_password.label_tag}}
+                {{form.re_password|attr:'class:form-control'|attr:'placeholder:Confirm Your Password'}}
+                {% if form.re_password.errors %}
+                    <div class='alert alert-danger'>
+                        {{form.re_password.errors}}
+                    </div>
+                {% endif %}
+              </div>
+              
+              <div class="form-group">
+                <input type="submit" value="Register" class="btn btn-primary py-3 px-5">
+              </div>
+            </form>
+					</div>
+					<div class="col-md-6 d-flex align-items-stretch">
+						<div >
+              <img src='https://images.unsplash.com/photo-1496317899792-9d7dbcd928a1?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9' alt='{{brand.full_name}}' style='width:100%'/>
+            </div>
+					</div>
+				</div>
+			</div>
+		</section>
+{% endblock %}

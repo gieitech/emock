@@ -12,5 +12,7 @@ urlpatterns = [
     path('student/<int:student_pk>/reports/', ReportListView.as_view(),name='report-list-create'),
 
     # website view
-    path('',ExaminationView.as_view(),name='examination'),
+    path('web-list/',QuizListView.as_view(),name='list'),
+    path('<int:pk>/web-detail/',QuizDetailView.as_view(),name='quiz-web-detail'),
+    path('<int:pk>/examination/',ExaminationView.as_view(),name='examination'),
 ]

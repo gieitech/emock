@@ -8,8 +8,15 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from .serializers import *
 from .models import *
-from django.views.generic import TemplateView
+from django.views.generic import (
+    TemplateView,
+    ListView,
+    DetailView,
+)
 from Website.models import Brand
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.urls import reverse_lazy
+
 # Create your views here.
 class QuizListCreate(ListCreateAPIView):
 
@@ -90,11 +97,38 @@ class ReportListView(ListCreateAPIView):
 
 
 # examination page
-class ExaminationView(TemplateView):
-    template_name ='Quiz/index.html'
+class QuizListView(ListView):
+    model = Quiz
+    context_object_name = 'quizzes'
+    template_name='Quiz/quiz_list.html'
+
 
     def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context["brand"] = Brand.objects.get(id=1)
+        context = super(QuizListView, self).get_context_data(**kwargs)
+        context['brand'] = Brand.objects.get(id=1)
         return context
+
     
+    
+
+
+class QuizDetailView(LoginRequiredMixin,DetailView):
+    model = Quiz
+    template_name='Quiz/quiz_detail.html'
+    login_url = reverse_lazy('Accounts:web-login')
+
+    def get_context_data(self, **kwargs):
+        context = super(QuizDetailView, self).get_context_data(**kwargs)
+        context['brand'] = Brand.objects.get(id=1)
+        return context
+
+
+class ExaminationView(LoginRequiredMixin,TemplateView):
+    template_name = 'Quiz/examination.html'
+    login_url = reverse_lazy('Accounts:web-login') 
+
+    def get_context_data(self, **kwargs):
+        context = super(ExaminationView, self).get_context_data(**kwargs)
+        context['brand'] = Brand.objects.get(id=1)
+        context['quiz_id'] = self.kwargs.get('pk')
+        return context
