@@ -95,9 +95,9 @@ class Examspace extends Component{
         
     }
     submitAnswers = ()=>{
-        const {exitFullScreen,devAjaxUrl,Quiz,Student,} = this.props;
+        const {exitFullScreen,prodAjaxUrl,Quiz,Student,} = this.props;
         const {Answersheet} = this.state;
-        axios.post(`${devAjaxUrl}/quiz/${Quiz.id}/generate-report/${Student}/`,Answersheet)
+        axios.post(`${prodAjaxUrl}/quiz/${Quiz.id}/generate-report/${Student}/`,Answersheet)
             .then((response)=>{
                 console.log(response.data)
                 this.props.setReport(response.data)

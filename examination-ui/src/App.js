@@ -48,11 +48,11 @@ class App extends Component {
     }
   }
   componentWillMount = ()=>{ 
-    const {devAjaxUrl} = this.state;
+    const {prodAjaxUrl} = this.state;
     console.log(this.getQuizId());
     Promise.all([
-      axios.get(`${devAjaxUrl}/quiz/${this.getQuizId()}/details/`),
-      axios.get(`${devAjaxUrl}/quiz/${this.getQuizId()}/questions/`)
+      axios.get(`${prodAjaxUrl}/quiz/${this.getQuizId()}/details/`),
+      axios.get(`${prodAjaxUrl}/quiz/${this.getQuizId()}/questions/`)
     ])
     .then(axios.spread((details , questions)=>{
       
@@ -159,6 +159,7 @@ class App extends Component {
                 agencyName={agencyName}
                 exitFullScreen={this.exitFullScreen}
                 devAjaxUrl={devAjaxUrl}
+                prodAjaxUrl={prodAjaxUrl}
                 Student={Student}
                 setReport={this.setReport}
               />
