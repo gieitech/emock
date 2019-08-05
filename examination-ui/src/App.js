@@ -18,27 +18,7 @@ class App extends Component {
     fullScreenActive : false,
     Quiz:{},
     Questions:[],
-    Report : {
-          "id": 45,
-          "quiz": {
-              "id": 2,
-              "no_of_questions": 2,
-              "full_marks": 4,
-              "name": "Japanese Language 101",
-              "syllabus": "Dummie stuff",
-              "allotted_time_in_minutes": 10,
-              "negative_marking": true,
-              "cover_image_url": "https://images.unsplash.com/photo-1492998680170-81f8863d8d2d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1225",
-              "isActive": true,
-              "pub_date": "2019-05-31"
-          },
-          "answered": 2,
-          "correct": 0,
-          "gained_marks": 0,
-          "submission_date": "2019-08-05",
-          "submission_time": "12:33:34.010086",
-          "student": 14
-      }
+    Report : false,
   }
   style ={
     quiz_image:{
