@@ -53,9 +53,9 @@ class ReportCard extends Component{
                                 <tbody>
                                     <tr>
                                         
+                                        <td>{Report.answered}</td>
+                                        <td>{Report.correct}</td>
                                         <td>{Report.gained_marks}</td>
-                                        <td>Otto</td>
-                                        <td>@mdo</td>
                                     </tr>
                                 </tbody>
                             </Table>
