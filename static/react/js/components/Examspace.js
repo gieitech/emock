@@ -1,5 +1,10 @@
+
+
 class Examspace extends React.Component{
     style = {
+        examination:{
+            height:'100vh',
+        },
         single_product:{
 
         },
@@ -8,12 +13,16 @@ class Examspace extends React.Component{
         },
         single_product:{
 
-            
+
+        },
+        information_bar:{
+            backgroundColor:'#'
         }
 
     }
     render = ()=>{
         const {
+            examination,
             information_bar,
             questions_list,
             single_product,

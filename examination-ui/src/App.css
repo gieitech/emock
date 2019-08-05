@@ -1,0 +1,14 @@
+html {
+    background-color: #ffffff;
+    /* Or any color / image you want */
+}
+
+.App:fullscreen {
+    background-color: rgba(255,255,255,0);
+}
+.App:-webkit-full-screen {
+    background-color: rgba(255,255,255,0);
+}
+.App:-moz-full-screen {
+    background-color: rgba(255,255,255,0);
+}

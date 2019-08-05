@@ -24,7 +24,14 @@
     <link rel="stylesheet" href="{% static 'Website/css/flaticon.css' %}">
     <link rel="stylesheet" href="{% static 'Website/css/icomoon.css' %}">
     <link rel="stylesheet" href="{% static 'Website/css/style.css' %}">
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+      crossorigin="anonymous"
+    />
     <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+    {% block react_build_css %}{% endblock %}
   </head>
   <body>
 	  <div class="bg-top navbar-light">
@@ -66,12 +73,7 @@
 				<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
 	        <span class="oi oi-menu"></span> Menu
 	      </button>
-	      <form action="#" class="searchform order-lg-last">
-          <div class="form-group d-flex">
-            <input type="text" class="form-control pl-3" placeholder="Search">
-            <button type="submit" placeholder="" class="form-control search"><span class="ion-ios-search"></span></button>
-          </div>
-        </form>
+	      
 	      <div class="collapse navbar-collapse" id="ftco-nav">
 	        <ul class="navbar-nav mr-auto">
 	        	<li class="nav-item active"><a href="{% url 'Website:home' %}" class="nav-link pl-0">Home</a></li>
@@ -175,6 +177,7 @@
   {% comment %} <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
   <script src="js/google-map.js"></script> {% endcomment %}
   <script src="{% static 'Website/js/main.js' %}"></script>
+  {% block custom_script %}{% endblock %}
   
   <!-- REACT ZONE -->
   <!-- CDN LINKS -->
@@ -184,10 +187,11 @@
 
   <!-- NPM packages-->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.0/axios.min.js" integrity="sha256-S1J4GVHHDMiirir9qsXWc8ZWw74PHHafpsHp5PXtjTs=" crossorigin="anonymous"></script>
-  <script src="https://cdn.jsdelivr.net/npm/react-fullscreen@0.1.0/dist/index.min.js"></script>
+  
   <!-- IMPORTING COMPONENTS-->
   <script src='{% static "react/js/components/Loader.js" %}' type='text/babel'></script>
   <script src='{% static "react/js/components/Examspace.js" %}' type='text/babel'></script>
   {% block react_script %}{% endblock %}
+  {% block react_build_js %}{% endblock %}
   </body>
 </html>

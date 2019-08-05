@@ -8,6 +8,7 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from .serializers import *
 from .models import *
+from Accounts.serializers import StudentSerializer
 from django.views.generic import (
     TemplateView,
     ListView,
@@ -16,7 +17,9 @@ from django.views.generic import (
 from Website.models import Brand
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy
-
+from django.contrib.auth.models import User
+from django.shortcuts import render  
+from django.http import HttpResponse  
 # Create your views here.
 class QuizListCreate(ListCreateAPIView):
 
@@ -62,7 +65,7 @@ class GenerateReport(APIView):
         for i in request.data:
             question = Question.objects.get(pk=i['question'])
             if not question.isMultipleCorrect:
-                option_input = Option.objects.get(pk=i['option'])
+                option_input = Option.objects.get(pk=i['options'][0])
                 option_saved = question.correctAnswer()
                 if option_input == option_saved:
                     correct += 1
@@ -124,11 +127,19 @@ class QuizDetailView(LoginRequiredMixin,DetailView):
 
 
 class ExaminationView(LoginRequiredMixin,TemplateView):
-    template_name = 'Quiz/examination.html'
+    template_name = 'examination-ui/examination-ui.html'
+    # template_name = 'Quiz/examination.html'
     login_url = reverse_lazy('Accounts:web-login') 
 
     def get_context_data(self, **kwargs):
+        self.request.COOKIES['Student'] = Student.objects.get(user=self.request.user)
         context = super(ExaminationView, self).get_context_data(**kwargs)
         context['brand'] = Brand.objects.get(id=1)
         context['quiz_id'] = self.kwargs.get('pk')
         return context
+
+    def render_to_response(self, context, **response_kwargs):
+        student = Student.objects.get(user=self.request.user)
+        response = super(ExaminationView, self).render_to_response(context, **response_kwargs)
+        response.set_cookie('student', str(student.id))
+        return response

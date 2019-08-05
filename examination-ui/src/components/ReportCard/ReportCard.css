@@ -1,0 +1,20 @@
+.report-card{
+   
+    width:100%;
+    
+    
+}
+
+.hero-image{
+    width:100%;
+    -webkit-filter: blur(5px); /* Safari 6.0 - 9.0 */
+    filter: blur(5px);
+    z-index: -1;
+}
+
+.report-data{
+    -webkit-box-shadow: 7px 7px 51px -14px rgba(167,34,45,1);
+    -moz-box-shadow: 7px 7px 51px -14px rgba(167,34,45,1);
+    box-shadow: 7px 7px 51px -14px rgba(167,34,45,1);
+    
+}

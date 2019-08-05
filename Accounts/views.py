@@ -21,6 +21,7 @@ from django.views.generic import (
     TemplateView,
 )
 from django.urls import reverse_lazy
+from Quiz.models import Report
 # Create your views here.
 class StudentListCreate(ListCreateAPIView):
 
@@ -111,7 +112,6 @@ class ProfileView(TemplateView):
         user = self.request.user
         if not(user.is_staff):
             context['student'] = Student.objects.get(user=user)
-        
         context['brand'] = Brand.objects.get(id=1)
         return context
 

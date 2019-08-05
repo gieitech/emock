@@ -1,0 +1,51 @@
+*:fullscreen, *:-webkit-full-screen, *:-moz-full-screen {
+    background-color: rgba(255,255,255,0) !important;
+}
+.examspace {
+    background-color: #fff !important;
+    height : 100vh;    
+
+}
+
+.status-bar{
+    height: 8em;
+    width : 100%;
+    background-color: #CBEF43;
+    display: block;
+    margin-bottom : 2em;
+    display: grid;
+    grid-template-columns: 3fr  5fr 4fr 2fr;
+    grid-gap: 2em;
+    -webkit-box-shadow: 4px 10px 32px -6px rgba(47,37,27,1);
+    -moz-box-shadow: 4px 10px 32px -6px rgba(47,37,27,1);
+    box-shadow: 4px 10px 32px -6px rgba(47,37,27,1);
+
+}
+
+.questions-list{
+    background-color: azure;
+    height : 100%;
+    width : 6em;
+    display: block;
+}
+.examspace li{
+    list-style-type: upper-latin;
+    cursor: pointer;
+}
+.examspace input[type=checkbox]{
+    width : 1.5em;
+    height : 1.5em;
+    margin: 0;
+    cursor: pointer;
+}
+
+.status-bar h5{
+    text-align: center;
+    vertical-align: middle;
+    position:relative;
+    top : 30%;
+}
+
+.quiz-info{
+    padding : 1em;
+}

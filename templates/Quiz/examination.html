@@ -7,7 +7,7 @@
 
 {% block react_script %}
     <script type='text/babel'>
-        class Examination extends React.Component{
+        class Examination extends React.Component{ 
             state = {
                 deviceError:false,
                 loading:false,
@@ -87,6 +87,14 @@
                 this.setState({fullscreen:true})
 
             }
+            handleKeyPress = (event)=>{
+                if(event.which === 13){
+                    this.beginTest();
+                }
+            }
+            fullscreen = (event)=>{
+                
+            }
             render=()=>{
                 const {deviceError,loading,Quiz,Questions,fullscreen,baseAjaxUrl} = this.state;
                 const {
@@ -108,7 +116,7 @@
                     )
                 }
                 return(
-                    <div id='quiz'>
+                    <div id='quiz' onKeyPress={this.handleKeyPress}>
                         {
                             fullscreen 
                             ? <Examspace
@@ -117,7 +125,7 @@
                                 Questions={Questions} 
                             
                                 />
-                            : <div>
+                            : <div >
                                 <img src={Quiz.cover_image_url} alt={Quiz.name} style={quiz_image}/>
                                 <div style={quiz_info}>
                                     <div className='row'>

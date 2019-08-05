@@ -15,6 +15,7 @@
                     student:{},
                     loading:false,
                     baseAjaxUrl: `${location.protocol}//${location.hostname}:${location.port}`,
+                    Reports : [],
                 }
                 componentWillMount = ()=>{
                     const {baseAjaxUrl} = this.state;
@@ -24,17 +25,30 @@
                         .then((response)=>{
                             this.setState({
                                 student:response.data,
-                                loading:false,
+                                
                             })
+                            axios.get(`${baseAjaxUrl}/quiz/student/${response.data.id}/reports/`)
+                                .then((reports)=>{
+                                    this.setState({
+                                        Reports : reports.data,
+                                        loading:false,
+                                    })
+                                })
+                                .catch((response,err)=>{
+                                    console.log(err);
+                                    this.setState({loading:false})
+                                    alert(response.message); 
+                                })
                         })
                         .catch((response,error)=>{
                             console.log(error);
 
                             this.setState({loading:false})
                         })
+                    
                 }
                 render=()=>{
-                    const {loading,student} = this.state;
+                    const {loading,student,Reports} = this.state;
                     const {user} = student;
                     if(loading){
                         return(
@@ -72,7 +86,9 @@
                                     </div>
                                     </div>
                                 </div>
-                                </section>
+                                
+                            </section>
+                            
 
                         </div>
                     )
@@ -92,6 +108,18 @@
             width:4em;
             object-fit:cover;
         }
+        .quiz-image{
+            width:3em;
+            height:3em;
+            border-radius:50%;
+        }
+        .report-card{
+            -webkit-box-shadow: 2px 10px 34px -4px rgba(0,0,0,0.75);
+            -moz-box-shadow: 2px 10px 34px -4px rgba(0,0,0,0.75);
+            box-shadow: 2px 10px 34px -4px rgba(0,0,0,0.75);
+            padding: 2em;
+            border-radius:1em;
+        }
     </style>
     
     <section class="hero-wrap hero-wrap-2" style="background-image: url({{brand.random_hero_image}});">
@@ -106,6 +134,41 @@
       </div>
     </section>
     <section class="hero-wrap hero-wrap-2" id='profile'></section>
+    <section class="hero-wrap hero-wrap">
+         <div class="container">
+            {% if student.report_set.all %}
+                {% for report in student.report_set.all %}
+                    <div class="align-items-center justify-content-center report-card" >
+                        <h4 class='text-center'><img src={{report.quiz.cover_image_url}} class='quiz-image'/> {{report.quiz.name}}<h4>
+                        <br/>
+                        <p style='display:block;font-size:1em;' class='text-center'><i class="fa fa-calendar" aria-hidden="true"></i> {{report.submission_date}}</p>
+                        <p class='text-center'><i class="fa fa-clock-o" aria-hidden="true"></i> {{report.submission_time}}</p>
+                        <table class='table table-bordered' style='width:60%;margin:auto;'>
+                            <thead>
+                                <tr>
+                                    <th>Answered</th>
+                                    <th>Correct</th>
+                                    <th>Gained Marks</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>{{report.answered}}</td>
+                                    <td>{{report.correct}}</td>
+                                    <td>{{report.gained_marks}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <br/>
+                {% endfor %}
+            {% else %}
+                <div class='alert alert-warning'>
+                    <h1 class='text-center'>You have not given any exams. Give a test and results shall appear.</h1>
+                </div>
+            {% endif %}    
+        </div>
+    </section>
 
     
 		

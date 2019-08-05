@@ -20,7 +20,7 @@ class Student(models.Model):
         return str(self.user.first_name)+" "+str(self.middle_name)+" "+str(self.user.last_name)
 
     def __str__(self):
-        return str(self.full_name())
+        return str(self.full_name)
 
 
     
