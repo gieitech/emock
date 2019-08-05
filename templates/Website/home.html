@@ -246,7 +246,7 @@
 								<div class="img" style="background-image: url({{quiz.cover_image_url}});"></div>
 								<div class="text pt-4">
 									<p class="meta d-flex">
-										<span><i class="icon-user mr-2"></i>Mr. Khan</span>
+										<span><i class="icon-user mr-2"></i> {{brand.full_name}}</span>
 										<span><i class="icon-table mr-2"></i>{{quiz.full_marks}} Marks</span>
 										<span><i class="icon-calendar mr-2"></i>{{quiz.no_of_questions}} Questions</span>
 									</p>
@@ -262,7 +262,7 @@
 						{% endfor %}
 					{% else %}
 					<div class="col-md-3 course ftco-animate">
-						<div class="img" style="background-image: url(images/course-1.jpg);"></div>
+						<div class="img" style="background-image: url({% static 'Website/images/course-1.jpg' %});"></div>
 						<div class="text pt-4">
 							<p class="meta d-flex">
 								<span><i class="icon-user mr-2"></i>Mr. Khan</span>
@@ -275,7 +275,7 @@
 						</div>
 					</div>
 					<div class="col-md-3 course ftco-animate">
-						<div class="img" style="background-image: url(images/course-2.jpg);"></div>
+						<div class="img" style="background-image: url({% static 'Website/images/course-2.jpg' %});"></div>
 						<div class="text pt-4">
 							<p class="meta d-flex">
 								<span><i class="icon-user mr-2"></i>Mr. Khan</span>
@@ -288,7 +288,7 @@
 						</div>
 					</div>
 					<div class="col-md-3 course ftco-animate">
-						<div class="img" style="background-image: url(images/course-3.jpg);"></div>
+						<div class="img" style="background-image: url({% static 'Website/images/course-3.jpg' %});"></div>
 						<div class="text pt-4">
 							<p class="meta d-flex">
 								<span><i class="icon-user mr-2"></i>Mr. Khan</span>
@@ -301,7 +301,7 @@
 						</div>
 					</div>
 					<div class="col-md-3 course ftco-animate">
-						<div class="img" style="background-image: url(images/course-4.jpg);"></div>
+						<div class="img" style="background-image: url({% static 'Website/images/course-4.jpg' %});"></div>
 						<div class="text pt-4">
 							<p class="meta d-flex">
 								<span><i class="icon-user mr-2"></i>Mr. Khan</span>
@@ -455,17 +455,19 @@
 							<div class="blog-entry">
 							
 							<a href="blog-single.html" class="block-20 d-flex align-items-end" style="background-image: url({{branch.g_map_embed}});">
-												<div class="meta-date text-center p-2">
-								<span class="day">Galaxy</span>
-								<span class="mos">Guide</span>
-								<span class="yr">Center</span>
+								
+								<div class="meta-date text-center p-2">
+									<span class="day">Galaxy</span>
+									<span class="mos">Guide</span>
+									<span class="yr">Center</span>
 								</div>
+								<iframe src={{branch.g_map_embed}} ></iframe>
 							</a>
 							<div class="text bg-white p-4">
 								<h3 class="heading"><a href="#">{{branch.location}}</a></h3>
 								<p>{{branch.address}}</p>
 								<div class="d-flex align-items-center mt-4">
-									<p class="mb-0"><a href="#" class="btn btn-primary">Read More <span class="ion-ios-arrow-round-forward"></span></a></p>
+									<p class="mb-0"><a href="{% url 'Website:about' %}" class="btn btn-primary">Read More <span class="ion-ios-arrow-round-forward"></span></a></p>
 									
 								</div>
 							</div>
