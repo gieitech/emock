@@ -15,4 +15,5 @@ urlpatterns = [
     path('web-list/',QuizListView.as_view(),name='list'),
     path('<int:pk>/web-detail/',QuizDetailView.as_view(),name='quiz-web-detail'),
     path('<int:pk>/examination/',ExaminationView.as_view(),name='examination'),
+    # path('<int:pk>/examination/',GovermentExaminationView.as_view(),name='examination'),
 ]

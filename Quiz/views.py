@@ -71,7 +71,13 @@ class GenerateReport(APIView):
                     correct += 1
                     marks_gained += question.marks
             else:
-                pass
+                submitted_options = i['options']
+                correct_options= question.correctAnswer()
+                for j in range(len(submitted_options)):
+                    for c_option in correct_options:
+                        if c_option.id == j:
+                            marks_gained += question.marks/len(correct_options)
+
 
         
         report = Report.objects.create(
@@ -128,7 +134,6 @@ class QuizDetailView(LoginRequiredMixin,DetailView):
 
 class ExaminationView(LoginRequiredMixin,TemplateView):
     template_name = 'examination-ui/examination-ui.html'
-    # template_name = 'Quiz/examination.html'
     login_url = reverse_lazy('Accounts:web-login') 
 
     def get_context_data(self, **kwargs):
@@ -141,5 +146,23 @@ class ExaminationView(LoginRequiredMixin,TemplateView):
     def render_to_response(self, context, **response_kwargs):
         student = Student.objects.get(user=self.request.user)
         response = super(ExaminationView, self).render_to_response(context, **response_kwargs)
+        response.set_cookie('student', str(student.id))
+        return response
+
+
+class GovermentExaminationView(LoginRequiredMixin,TemplateView):
+    template_name = 'goverment-ui/goverment-ui.html'
+    login_url = reverse_lazy('Accounts:web-login') 
+
+    def get_context_data(self, **kwargs):
+        self.request.COOKIES['Student'] = Student.objects.get(user=self.request.user)
+        context = super(GovermentExaminationView, self).get_context_data(**kwargs)
+        context['brand'] = Brand.objects.get(id=1)
+        context['quiz_id'] = self.kwargs.get('pk')
+        return context
+
+    def render_to_response(self, context, **response_kwargs):
+        student = Student.objects.get(user=self.request.user)
+        response = super(GovermentExaminationView, self).render_to_response(context, **response_kwargs)
         response.set_cookie('student', str(student.id))
         return response

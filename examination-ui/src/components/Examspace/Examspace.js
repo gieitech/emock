@@ -11,6 +11,7 @@ class Examspace extends Component{
     state={
         Answersheet : [],
         loading : false,
+        Confirmed : [],
         
     }
     fetchOption = (option_id)=>{
@@ -96,8 +97,8 @@ class Examspace extends Component{
     }
     submitAnswers = ()=>{
         const {exitFullScreen,prodAjaxUrl,Quiz,Student,} = this.props;
-        const {Answersheet} = this.state;
-        axios.post(`${prodAjaxUrl}/quiz/${Quiz.id}/generate-report/${Student}/`,Answersheet)
+        const {Confirmed} = this.state;
+        axios.post(`${prodAjaxUrl}/quiz/${Quiz.id}/generate-report/${Student}/`,Confirmed)
             .then((response)=>{
                 console.log(response.data)
                 this.props.setReport(response.data)
@@ -122,9 +123,44 @@ class Examspace extends Component{
             
         }
     }
+    isAnswered = (question_id)=>{
+        const {Answersheet} = this.state;
+        const q_index = Answersheet.findIndex(i=>i.question === question_id)
+        if(q_index > -1) return true;
+        return false;
+    }
+    isConfirmed = (question_id)=>{
+        const {Confirmed} = this.state;
+        const q_index = Confirmed.findIndex(i=>i.question === question_id)
+        if(q_index > -1) return true;
+        return false;
+    }
+    confirmAnswer = (e)=>{
+        const {Answersheet} = this.state;
+        const confirmedQuestions = this.state.Confirmed;
+        const q_index = Answersheet.findIndex(i=>i.question === parseInt(e.target.id));
+        if(q_index > -1){
+
+            confirmedQuestions.push(Answersheet[q_index]);
+            this.setState({Confirmed:confirmedQuestions});
+        }else{
+
+            console.log("Error")
+        }
+    }
+    revokeAnswer = (e)=>{
+        const temp_confirmed = this.state.Confirmed;
+        const q_index = temp_confirmed.findIndex(i=>i.question === parseInt(e.target.id))
+        if(q_index > -1 ){
+            temp_confirmed.splice(q_index , 1);
+            this.setState({Confirmed:temp_confirmed})
+        }else{
+            throw TypeError("Breach Detected !");
+        }
+    }
     render = ()=>{
         const {Quiz,Questions,agencyName} = this.props;
-        const {Answersheet} = this.state;
+        const {Answersheet,Confirmed} = this.state;
         return(
             <div className='examspace' style={{color:'#fff'}}>
                 <div className='status-bar'>
@@ -144,6 +180,7 @@ class Examspace extends Component{
                         <Table striped bordered hover style={{marginTop:'0.4em',textAlign:'center',color:'#fff'}}>
                             <thead>
                                 <tr>
+                                    <th><i className="fa fa-thumbs-up" aria-hidden="true"></i> Confirmed</th>
                                     <th><i className="fa fa-check" aria-hidden="true"></i> Attempt</th>
                                     <th><i className="fa fa-window-minimize" aria-hidden="true"></i> Left</th>
                                 
@@ -151,7 +188,7 @@ class Examspace extends Component{
                             </thead>
                             <tbody>
                                 <tr>
-                            
+                                    <td>{Confirmed.length}</td>
                                     <td>{Answersheet.length}</td>
                                     <td>{Quiz.no_of_questions - Answersheet.length}</td>
                                 
@@ -180,7 +217,7 @@ class Examspace extends Component{
                             {Questions.map((question , i)=>{
                                 return(
                                     <Nav.Item key={i}>
-                                        <Nav.Link eventKey={question.id}>{this.questionStatus(question.id)} <span className='badge badge-warning'>{i+1}</span>  {question.question_text}</Nav.Link>
+                                        <Nav.Link eventKey={question.id}>{this.isConfirmed(question.id)?<Badge variant='success'><i className="fa fa-thumbs-up" aria-hidden="true"></i></Badge>:<Badge variant='warning'><i className="fa fa-question-circle" aria-hidden="true"></i></Badge>} {this.questionStatus(question.id)} <span className='badge badge-warning'>{i+1}</span>  {question.question_text}</Nav.Link>
                                     </Nav.Item>
                                 );
                             })}
@@ -209,7 +246,8 @@ class Examspace extends Component{
                                                         );
                                                     })}
                                                 </div>
-                                                
+                                                {this.isAnswered(question.id) && <Button variant='success' onClick={this.confirmAnswer} id={question.id} disabled={this.isConfirmed(question.id)}><i className="fa fa-thumbs-up" aria-hidden="true"></i> Confirm ?</Button>}
+                                                {this.isConfirmed(question.id) && <Button variant='warning' id={question.id} onClick={this.revokeAnswer}><i className="fa fa-question-circle" aria-hidden="true"></i> Revoke</Button>} 
                                             </Tab.Pane>
                                         );
                                     })}

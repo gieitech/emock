@@ -1,5 +1,5 @@
 import React,{Component} from 'react';
-import {Row,Col,Container,Table} from 'react-bootstrap';
+import {Row,Col,Table} from 'react-bootstrap';
 import './ReportCard.css';
 
 class ReportCard extends Component{
