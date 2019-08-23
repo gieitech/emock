@@ -212,7 +212,7 @@ class Examspace extends Component{
                 </div>
                <Tab.Container id="left-tabs-example" defaultActiveKey={Questions[0].id}>
                     <Row>
-                        <Col sm={3}>
+                        <Col sm={3} style={{overflow:'auto'}}>
                         <Nav variant="pills" className="flex-column">
                             {Questions.map((question , i)=>{
                                 return(
