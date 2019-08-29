@@ -213,11 +213,11 @@ class Examspace extends Component{
                <Tab.Container id="left-tabs-example" defaultActiveKey={Questions[0].id}>
                     <Row>
                         <Col sm={3} >
-                        <Nav variant="pills" className="flex-column" style={{display:'block!important',overflow:'auto!important'}}>
+                        <Nav variant='pills' style={{height:'80vh',flexWrap:'initial',overflow:'auto'}}>
                             {Questions.map((question , i)=>{
                                 return(
                                     <Nav.Item key={i}>
-                                        <Nav.Link eventKey={question.id}>{this.isConfirmed(question.id)?<Badge variant='success'><i className="fa fa-thumbs-up" aria-hidden="true"></i></Badge>:<Badge variant='warning'><i className="fa fa-question-circle" aria-hidden="true"></i></Badge>} {this.questionStatus(question.id)} <span className='badge badge-warning'>{i+1}</span>  {question.question_text}</Nav.Link>
+                                        <Nav.Link eventKey={question.id}>{this.isConfirmed(question.id)?<Badge variant='success'><i className="fa fa-thumbs-up" aria-hidden="true"></i></Badge>:<Badge variant='warning'><i className="fa fa-question-circle" aria-hidden="true"></i></Badge>} {this.questionStatus(question.id)} <span className='badge badge-primary'>{i+1}</span>  {question.question_text}</Nav.Link>
                                     </Nav.Item>
                                 );
                             })}
