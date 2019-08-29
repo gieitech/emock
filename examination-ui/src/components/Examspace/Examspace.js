@@ -213,7 +213,7 @@ class Examspace extends Component{
                <Tab.Container id="left-tabs-example" defaultActiveKey={Questions[0].id}>
                     <Row>
                         <Col sm={3} >
-                        <Nav variant='pills' style={{height:'80vh',flexWrap:'initial',overflow:'auto'}}>
+                        <Nav variant='pills' style={{height:'75vh',overflow:'auto'}}>
                             {Questions.map((question , i)=>{
                                 return(
                                     <Nav.Item key={i}>
