@@ -1,0 +1,27 @@
+.quiz_pub-date{
+    padding : 0.4em;
+    background-color: rgba(83, 96, 104, 0.733);
+    color: rgb(255, 255, 255);
+}
+
+.quiz-active{
+    color : rgb(255, 255, 255);
+    background-color: #28A745;
+    border : 1px solid rgb(255, 255, 255);
+    padding : 0.3em;
+    text-align: center;
+    font-size: 0.7em;
+}
+
+.quiz-inactive{
+    color : #FF220C;
+    border : 1px solid #FF220C;
+    padding : 0.3em;
+    text-align: center;
+    font-size: 0.7em;
+}
+
+.quiz-cover{
+    height : 15em;
+    object-fit: cover;
+}

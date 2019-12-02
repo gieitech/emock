@@ -1,5 +1,6 @@
 from rest_framework.generics import (
-    
+    CreateAPIView,
+    RetrieveAPIView,
     ListCreateAPIView,
     RetrieveUpdateDestroyAPIView,
 )
@@ -32,7 +33,14 @@ class QuizEditDelete(RetrieveUpdateDestroyAPIView):
     serializer_class = QuizSerializer
     queryset = Quiz.objects.all()
 
+class QuizDetailsAPIView(RetrieveAPIView):
 
+    serializer_class = QuizDetailsSerializer
+    queryset = Quiz.objects.all()
+
+class QuizCreateAPIView(CreateAPIView):
+    serializer_class = QuizCreateSerializer
+    queryset = Quiz.objects.all()
 
 class QuestionListCreate(ListCreateAPIView):
 
@@ -107,7 +115,7 @@ class ReportListView(ListCreateAPIView):
 
 # examination page
 class QuizListView(ListView):
-    model = Quiz
+    queryset = Quiz.objects.all()
     context_object_name = 'quizzes'
     template_name='Quiz/quiz_list.html'
 
@@ -116,6 +124,10 @@ class QuizListView(ListView):
         context = super(QuizListView, self).get_context_data(**kwargs)
         context['brand'] = Brand.objects.get(id=1)
         return context
+
+    def get_queryset(self):
+        return self.queryset.filter(isActive=True)
+    
 
     
     
@@ -166,3 +178,25 @@ class GovermentExaminationView(LoginRequiredMixin,TemplateView):
         response = super(GovermentExaminationView, self).render_to_response(context, **response_kwargs)
         response.set_cookie('student', str(student.id))
         return response
+
+
+class QuestionCreateAPIView(APIView):
+    def post(self,request,quiz_id):
+        options = request.data['options']
+        quiz = Quiz.objects.get(id=quiz_id)
+        question = Question.objects.create(
+            quiz = quiz,
+            question_text=request.data['question_text'],
+            marks = request.data['marks']
+
+        )
+
+        for optData in options:
+            Option.objects.create(
+                question = question,
+                option_text = optData['option_text'],
+                isCorrect = optData['isCorrect'],
+            )
+
+        serializer = QuestionSerializer(question)
+        return Response(serializer.data,status=status.HTTP_201_CREATED)

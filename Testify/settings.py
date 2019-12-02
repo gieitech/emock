@@ -38,6 +38,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'tinymce',
+    'ckeditor',
     'rest_framework',
     'widget_tweaks',
     'Accounts',
@@ -52,6 +54,14 @@ REST_FRAMEWORK = {
         'rest_framework.authentication.TokenAuthentication',  
     ],
     
+}
+# TINYMCE_JS_URL = 'https://cdn.tiny.cloud/1/h8ekgfezyo7spdn49pd4zrltjgbow5drsa8mbfdqcit5q4tk/tinymce/5/tinymce.min.js'
+CKEDITOR_CONFIGS = {
+    'default': {
+        'toolbar': 'full',
+        
+        
+    },
 }
 
 MIDDLEWARE = [
@@ -137,12 +147,10 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = [
     STATIC_DIR,
 ]
+# STATIC_ROOT = STATIC_DIR
 
-CORS_ORIGIN_WHITELIST = [
-    "http://localhost:3000",
-    "https://galaxyguidecenter.pythonanywhere.com",
-    
-]
+CORS_ORIGIN_ALLOW_ALL = False
+
 
 LOGOUT_REDIRECT_URL = reverse_lazy('Website:home')
 LOGIN_REDIRECT_URL = reverse_lazy('Accounts:profile')

@@ -1,0 +1,26 @@
+.create-form-body{
+    height : 30em;
+    width : 25em;
+    background-color: #76B041;
+    position: fixed;
+    bottom : 1em;
+    right : 4em;
+    z-index: 99;
+    padding-top : 1em;
+    padding-bottom : 1em;
+    display: block;
+    overflow: auto;
+    color: aliceblue;
+}
+
+.toggle-quiz-create{
+    position: fixed;
+    bottom : 1em;
+    right : 1em;
+    z-index: 99;
+
+}
+
+::-webkit-scrollbar {
+    width: 1em;
+}

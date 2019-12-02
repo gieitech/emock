@@ -2,7 +2,7 @@ import React,{Component} from 'react';
 import {Tab, Row,Col,Nav,FormControl,InputGroup,Alert,Table,Button,Badge} from 'react-bootstrap';
 import {ToastContainer,toast} from 'react-toastify'
 import  ReactCountdownClock from 'react-countdown-clock';
-
+import Interweave,{Markup} from 'interweave';
 import './Examspace.css';
 import 'react-toastify/dist/ReactToastify.css';
 import axios from 'axios';
@@ -38,7 +38,7 @@ class Examspace extends Component{
             }else{
                 event.target.checked = false;
                 
-                toast.error(`The question ${question.question_text} has only one answer, first ticked option will be taken as default`,{autoClose:7000,position:'bottom-center'});
+                toast.error('Uncheck one question first to check another',{autoClose:7000,position:'bottom-center'});
             }
         }else{
             answersheet.push({question : question.id , options : [option.id,]});
@@ -87,25 +87,29 @@ class Examspace extends Component{
         if(event.target.checked){
             // when an option is checked
             this.addToAnswerSheet(targetQuestion , targetOption , event);
-            toast.info(`Question : ${targetQuestion.question_text}   Answer : ${targetOption.option_text} is selected`);
+            toast.info('You have ticked an option');
         }else{
             // when an option is unchecked
             this.removeFromAnswerSheet(targetQuestion , targetOption);
-            toast.warning(`Question : ${targetQuestion.question_text}  Answer : ${targetOption.option_text} is removed`);
+            
+            toast.warning('You have unticked an option');
         }
         
     }
     submitAnswers = ()=>{
         const {exitFullScreen,prodAjaxUrl,Quiz,Student,} = this.props;
         const {Confirmed} = this.state;
+        this.setState({loading:true});
         axios.post(`${prodAjaxUrl}/quiz/${Quiz.id}/generate-report/${Student}/`,Confirmed)
             .then((response)=>{
                 console.log(response.data)
                 this.props.setReport(response.data)
+                this.setState({loading:false});
             })
             .catch((response,err)=>{
                 console.log(err);
                 toast.error(response.message,{position:'bottom-center'})
+                this.setState({loading:false});
             })
         exitFullScreen()
     }
@@ -217,7 +221,7 @@ class Examspace extends Component{
                             {Questions.map((question , i)=>{
                                 return(
                                     <Nav.Item key={i}>
-                                        <Nav.Link eventKey={question.id}>{this.isConfirmed(question.id)?<Badge variant='success'><i className="fa fa-thumbs-up" aria-hidden="true"></i></Badge>:<Badge variant='warning'><i className="fa fa-question-circle" aria-hidden="true"></i></Badge>} {this.questionStatus(question.id)} <span className='badge badge-primary'>{i+1}</span>  {question.question_text}</Nav.Link>
+                                        <Nav.Link eventKey={question.id}>{this.isConfirmed(question.id)?<Badge variant='success'><i className="fa fa-thumbs-up" aria-hidden="true"></i></Badge>:<Badge variant='warning'><i className="fa fa-question-circle" aria-hidden="true"></i></Badge>} {this.questionStatus(question.id)} <span className='badge badge-primary'>{i+1}</span>  <Interweave content={question.question_text} /></Nav.Link>
                                     </Nav.Item>
                                 );
                             })}
@@ -225,29 +229,33 @@ class Examspace extends Component{
                             
                         </Nav>
                         </Col>
-                        <Col sm={9}>
+                        <Col sm={9} className="question_body">
                             <Tab.Content>
                                     {Questions.map((question , i)=>{
                                         return(
                                             <Tab.Pane eventKey={question.id} key={i}>
-                                                <h2  style={{color:'#F0A868'}}>{question.question_text}</h2>
+                                                <div  style={{color:'#F0A868'}}><Interweave content={question.question_text} /></div>
                                                 <br/>
                                                 
                                                 {question.isMultipleCorrect && <Alert variant='warning' style={{width:'60%'}}>This Question has multiple Answers</Alert>}
+                                                {this.isAnswered(question.id) && <Button variant='success' onClick={this.confirmAnswer} id={question.id} disabled={this.isConfirmed(question.id)}><i className="fa fa-thumbs-up" aria-hidden="true"></i> Confirm ?</Button>}
+                                                {this.isConfirmed(question.id) && <Button variant='warning' id={question.id} onClick={this.revokeAnswer}><i className="fa fa-question-circle" aria-hidden="true"></i> Revoke</Button>}
+                                                <br/>
                                                 <div>
                                                     {question.options.map((option , j)=>{
                                                         return(
-                                                            <InputGroup className="mb-3" key={j} style={{width:'60%'}}>
-                                                                <InputGroup.Prepend>
+                                                            <InputGroup className="mb-3" key={j} style={{width:'70%',color:'black'}}>
+                                                                
                                                                 <InputGroup.Checkbox onChange={this.tickUntickOption} id={option.id}/>
-                                                                </InputGroup.Prepend>
-                                                                <FormControl value={option.option_text} disabled/>
+                                                                
+                                                                <div className='option-text'>
+                                                                    <Interweave content={option.option_text} style={{color : 'black'}}/>
+                                                                </div>
                                                             </InputGroup>
                                                         );
                                                     })}
                                                 </div>
-                                                {this.isAnswered(question.id) && <Button variant='success' onClick={this.confirmAnswer} id={question.id} disabled={this.isConfirmed(question.id)}><i className="fa fa-thumbs-up" aria-hidden="true"></i> Confirm ?</Button>}
-                                                {this.isConfirmed(question.id) && <Button variant='warning' id={question.id} onClick={this.revokeAnswer}><i className="fa fa-question-circle" aria-hidden="true"></i> Revoke</Button>} 
+                                                 
                                             </Tab.Pane>
                                         );
                                     })}

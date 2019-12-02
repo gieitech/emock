@@ -12,7 +12,7 @@ class App extends Component {
     Student : false,
     deviceError:false,
     loading:false,
-    devAjaxUrl : 'http://127.0.0.1:8000',
+    // prodAjaxUrl : 'http://127.0.0.1:8000',
     prodAjaxUrl : `${window.location.protocol}//${window.location.hostname}:${window.location.port}`,
     agencyName : 'Galaxy Guide Center',
     fullScreenActive : false,
@@ -93,7 +93,7 @@ class App extends Component {
     window.removeEventListener('keydown',this.disableKeyBoard , false);
   }
   getQuizId = ()=>{
-    return parseInt(window.location.pathname.substr(6).slice(0 , -13)) || 1;
+    return parseInt(window.location.pathname.substr(6).slice(0 , -13)) || 6;
   }
   goFullScreen = ()=>{
     this.setState({

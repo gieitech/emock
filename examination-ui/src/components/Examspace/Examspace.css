@@ -4,7 +4,7 @@
 .examspace {
     background-color: #fff !important;
     height : 100vh;    
-
+    
 }
 
 .status-bar{
@@ -48,4 +48,12 @@
 
 .quiz-info{
     padding : 1em;
+}
+
+.option-text{
+    margin-left : 1em;
+}
+.question_body{
+    height: 75vh;
+    overflow: auto;
 }

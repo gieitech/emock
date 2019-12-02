@@ -21,6 +21,18 @@ class QuestionSerializer(ModelSerializer):
         model = Question
         fields = '__all__'
 
+class QuizCreateSerializer(ModelSerializer):
+    class Meta:
+        model = Quiz
+        fields = '__all__'
+
+class QuizDetailsSerializer(ModelSerializer):
+    questions = QuestionSerializer(many=True)
+    no_of_questions = IntegerField()
+    full_marks = IntegerField()
+    class Meta:
+        model = Quiz
+        fields = '__all__'
 
 
 class QuizSerializer(ModelSerializer):
