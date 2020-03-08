@@ -26,7 +26,7 @@ SECRET_KEY = 'm)!tdc!n0fv()h02_4u4@=qx!7ph_lwhie@15ygwglv$!mgq1l'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['galaxyguidecenter.pythonanywhere.com']
+ALLOWED_HOSTS = ['emocktest.pythonanywhere.com']
 
 
 # Application definition
@@ -51,16 +51,16 @@ INSTALLED_APPS = [
 
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': [
-        'rest_framework.authentication.TokenAuthentication',  
+        'rest_framework.authentication.TokenAuthentication',
     ],
-    
+
 }
 # TINYMCE_JS_URL = 'https://cdn.tiny.cloud/1/h8ekgfezyo7spdn49pd4zrltjgbow5drsa8mbfdqcit5q4tk/tinymce/5/tinymce.min.js'
 CKEDITOR_CONFIGS = {
     'default': {
         'toolbar': 'full',
-        
-        
+
+
     },
 }
 

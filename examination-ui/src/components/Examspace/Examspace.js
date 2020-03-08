@@ -12,7 +12,7 @@ class Examspace extends Component{
         Answersheet : [],
         loading : false,
         Confirmed : [],
-        
+
     }
     fetchOption = (option_id)=>{
         const {Questions} = this.props;
@@ -37,12 +37,12 @@ class Examspace extends Component{
                 this.setState({Answersheet:answersheet});
             }else{
                 event.target.checked = false;
-                
+
                 toast.error('Uncheck one question first to check another',{autoClose:7000,position:'bottom-center'});
             }
         }else{
             answersheet.push({question : question.id , options : [option.id,]});
-            
+
             this.setState({
                 Answersheet : answersheet,
             })
@@ -51,7 +51,7 @@ class Examspace extends Component{
     removeFromAnswerSheet = (question , option)=>{
         const answersheet = this.state.Answersheet;
         const question_index = answersheet.findIndex(i=>i.question===question.id);
-    
+
         if(question_index > -1){
             // question is in answer sheet
             if(question.isMultipleCorrect){
@@ -62,15 +62,15 @@ class Examspace extends Component{
                     }else{
                         answersheet.splice(question_index , 1)
                     }
-                    
+
                     this.setState({Answersheet:answersheet})
                 }
 
 
-               
+
             }else{
                answersheet.splice(question_index , 1);
-               
+
                this.setState({Answersheet:answersheet,multiCorrectError:false});
             }
 
@@ -78,7 +78,7 @@ class Examspace extends Component{
             // question is not in answer sheet
             toast.error(`Fatal Error !`)
             // throw TypeError('Breach detected ! Stop the server at once');
-            
+
 
         }
     }
@@ -91,10 +91,10 @@ class Examspace extends Component{
         }else{
             // when an option is unchecked
             this.removeFromAnswerSheet(targetQuestion , targetOption);
-            
+
             toast.warning('You have unticked an option');
         }
-        
+
     }
     submitAnswers = ()=>{
         const {exitFullScreen,prodAjaxUrl,Quiz,Student,} = this.props;
@@ -124,7 +124,7 @@ class Examspace extends Component{
             return(
                 <Badge variant='danger'><i className="fa fa-circle-o" aria-hidden="true"></i></Badge>
             )
-            
+
         }
     }
     isAnswered = (question_id)=>{
@@ -169,17 +169,17 @@ class Examspace extends Component{
             <div className='examspace' style={{color:'#fff'}}>
                 <div className='status-bar'>
                     <div className='brand'>
-                        <h5 style={{margin:0}}>{agencyName}</h5>
+                        <h5 style={{margin:0}}>GIEITech MockTest</h5>
                         <br/>
                         <br/>
-                        <Button onClick={this.submitAnswers} variant='success' disabled={Answersheet.length === 0} style={{display:'block',margin:'auto'}}>Submit Answers</Button>
+                        <Button onClick={this.submitAnswers} variant='success' disabled={Answersheet.length === 0} style={{display:'block',margin:'auto'}}>Final Submit</Button>
                     </div>
                     <div className='quiz-info'>
                         <h4><i className="fa fa-book" aria-hidden="true"></i> {Quiz.name} <span className='badge badge-success'>{Quiz.full_marks} Mark{Quiz.full_marks > 1 && 's'}</span></h4>
                         <h6><i className="fa fa-database" aria-hidden="true"></i> {Quiz.no_of_questions} Question{Quiz.no_of_questions > 1 && 's'}</h6>
                         {Quiz.negative_marking && <h6><i className="fa fa-minus-circle" aria-hidden="true"></i> Marking</h6>}
                     </div>
-                    
+
                     <div className='exam-status'>
                         <Table striped bordered hover style={{marginTop:'0.4em',textAlign:'center',color:'#fff'}}>
                             <thead>
@@ -187,7 +187,7 @@ class Examspace extends Component{
                                     <th><i className="fa fa-thumbs-up" aria-hidden="true"></i> Confirmed</th>
                                     <th><i className="fa fa-check" aria-hidden="true"></i> Attempt</th>
                                     <th><i className="fa fa-window-minimize" aria-hidden="true"></i> Left</th>
-                                
+
                                 </tr>
                             </thead>
                             <tbody>
@@ -195,9 +195,9 @@ class Examspace extends Component{
                                     <td>{Confirmed.length}</td>
                                     <td>{Answersheet.length}</td>
                                     <td>{Quiz.no_of_questions - Answersheet.length}</td>
-                                
+
                                 </tr>
-                                
+
                             </tbody>
                         </Table>
 
@@ -207,7 +207,7 @@ class Examspace extends Component{
                             color="#2F251B"
                             alpha={0.9}
                             size={129}
-                            onComplete={this.submitAnswers} 
+                            onComplete={this.submitAnswers}
                             style={{height:'100%'}}/>
 
                     </div>
@@ -225,8 +225,8 @@ class Examspace extends Component{
                                     </Nav.Item>
                                 );
                             })}
-                            
-                            
+
+
                         </Nav>
                         </Col>
                         <Col sm={9} className="question_body">
@@ -234,9 +234,9 @@ class Examspace extends Component{
                                     {Questions.map((question , i)=>{
                                         return(
                                             <Tab.Pane eventKey={question.id} key={i}>
-                                                <div  style={{color:'#F0A868'}}><Interweave content={question.question_text} /></div>
+                                                <div  style={{color: 'rgb(24, 23, 88)', fontSize: '26px'}}><Interweave content={question.question_text} /></div>
                                                 <br/>
-                                                
+
                                                 {question.isMultipleCorrect && <Alert variant='warning' style={{width:'60%'}}>This Question has multiple Answers</Alert>}
                                                 {this.isAnswered(question.id) && <Button variant='success' onClick={this.confirmAnswer} id={question.id} disabled={this.isConfirmed(question.id)}><i className="fa fa-thumbs-up" aria-hidden="true"></i> Confirm ?</Button>}
                                                 {this.isConfirmed(question.id) && <Button variant='warning' id={question.id} onClick={this.revokeAnswer}><i className="fa fa-question-circle" aria-hidden="true"></i> Revoke</Button>}
@@ -245,9 +245,9 @@ class Examspace extends Component{
                                                     {question.options.map((option , j)=>{
                                                         return(
                                                             <InputGroup className="mb-3" key={j} style={{width:'70%',color:'black'}}>
-                                                                
+
                                                                 <InputGroup.Checkbox onChange={this.tickUntickOption} id={option.id}/>
-                                                                
+
                                                                 <div className='option-text'>
                                                                     <Interweave content={option.option_text} style={{color : 'black'}}/>
                                                                 </div>
@@ -255,11 +255,11 @@ class Examspace extends Component{
                                                         );
                                                     })}
                                                 </div>
-                                                 
+
                                             </Tab.Pane>
                                         );
                                     })}
-                
+
                             </Tab.Content>
                         </Col>
                     </Row>

@@ -7,7 +7,7 @@
 
 {% block react_script %}
     <script type='text/babel'>
-        class Examination extends React.Component{ 
+        class Examination extends React.Component{
             state = {
                 deviceError:false,
                 loading:false,
@@ -19,7 +19,7 @@
 
             componentWillMount = ()=>{
                 // screen width check
-               
+
                 if(screen.width < 1078){
                     this.setState({deviceError:'Only for Desktop'})
                 }else{
@@ -29,7 +29,7 @@
                         loading:true,
                     })
                     axios.all([
-                        axios.get(`${baseAjaxUrl}/quiz/${quiz_id}/details/`), 
+                        axios.get(`${baseAjaxUrl}/quiz/${quiz_id}/details/`),
                         axios.get(`${baseAjaxUrl}/quiz/${quiz_id}/questions/`)
                         ])
                         .then(axios.spread((quiz, questions)=> {
@@ -47,10 +47,10 @@
                             alert(response.data);
 
                         })
-                    
+
                 }
             }
-            
+
             toggleFullScreen = ()=>{
                 console.log(document.getElementById('quiz'))
 
@@ -67,10 +67,10 @@
                     zIndex:2,
                     width:'60%',
                     height:'70%',
-                    backgroundColor:'rgba(251, 255, 185, 0.6)',
+                    backgroundColor:'#a5a7aa99',
                     padding:'2em',
                     borderRadius:'2em',
-                    
+
                 },
                 thumbnail_quiz:{
                     height:'10em',
@@ -93,7 +93,7 @@
                 }
             }
             fullscreen = (event)=>{
-                
+
             }
             render=()=>{
                 const {deviceError,loading,Quiz,Questions,fullscreen,baseAjaxUrl} = this.state;
@@ -118,12 +118,12 @@
                 return(
                     <div id='quiz' onKeyPress={this.handleKeyPress}>
                         {
-                            fullscreen 
+                            fullscreen
                             ? <Examspace
                                 baseAjaxUrl={baseAjaxUrl}
                                 Quiz={Quiz}
-                                Questions={Questions} 
-                            
+                                Questions={Questions}
+
                                 />
                             : <div >
                                 <img src={Quiz.cover_image_url} alt={Quiz.name} style={quiz_image}/>
@@ -144,10 +144,10 @@
                                         </div>
 
                                     </div>
-                                   
-                                    
+
+
                                 </div>
-                                
+
                             </div>
                         }
 

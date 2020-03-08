@@ -4,15 +4,15 @@
   <head>
 
 	{% block title %}{% endblock %}
-    
+
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    
+
     <link href="https://fonts.googleapis.com/css?family=Poppins:200,300,400,500,600,700,800,900&display=swap" rel="stylesheet">
 
     <link rel="stylesheet" href="{% static 'Website/css/open-iconic-bootstrap.min.css' %}">
     <link rel="stylesheet" href="{% static 'Website/css/animate.css' %}">
-    
+
     <link rel="stylesheet" href="{% static 'Website/css/owl.carousel.min.css' %}">
     <link rel="stylesheet" href="{% static 'Website/css/owl.theme.default.min.css' %}">
     <link rel="stylesheet" href="{% static 'Website/css/magnific-popup.css' %}">
@@ -20,7 +20,7 @@
     <link rel="stylesheet" href="{% static 'Website/css/aos.css' %}">
 
     <link rel="stylesheet" href="{% static 'Website/css/ionicons.min.css' %}">
-    
+
     <link rel="stylesheet" href="{% static 'Website/css/flaticon.css' %}">
     <link rel="stylesheet" href="{% static 'Website/css/icomoon.css' %}">
     <link rel="stylesheet" href="{% static 'Website/css/style.css' %}">
@@ -33,12 +33,12 @@
     <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
     {% block react_build_css %}{% endblock %}
   </head>
-  <body>
+  <body style='background: #f5f5f5'>
 	  <div class="bg-top navbar-light">
     	<div class="container">
     		<div class="row no-gutters d-flex align-items-center align-items-stretch">
     			<div class="col-md-4 d-flex align-items-center py-4">
-    				<a class="navbar-brand" href="{% url 'Website:home' %}">Galaxy <span>Guide Centre</span></a>
+    				<a class="navbar-brand" href="{% url 'Website:home' %}">GIEITech <span>MockTest</span></a>
     			</div>
 	    		<div class="col-lg-8 d-block">
 		    		<div class="row d-flex">
@@ -56,7 +56,7 @@
 						    	<span>Call Us: +91 {{brand.contact_number}}</span>
 						    </div>
 					    </div>
-					    
+
 				    </div>
 			    </div>
 		    </div>
@@ -67,7 +67,7 @@
 				<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
 	        <span class="oi oi-menu"></span> Menu
 	      </button>
-	      
+
 	      <div class="collapse navbar-collapse" id="ftco-nav">
 	        <ul class="navbar-nav mr-auto">
 	        	<li class="nav-item active"><a href="{% url 'Website:home' %}" class="nav-link pl-0">Home</a></li>
@@ -79,7 +79,6 @@
               <li class="nav-item"><a href="{% url 'Accounts:profile' %}" class="nav-link"><i class="fa fa-user-circle-o" aria-hidden="true"></i> {{request.user.username }}</a></li>
             {% else %}
               <li class="nav-item"><a href="{% url 'Accounts:web-login' %}" class="nav-link"><i class="fa fa-sign-in" aria-hidden="true"></i> Login</a></li>
-              <li class="nav-item"><a href="{% url 'Accounts:student-register' %}" class="nav-link"><i class="fa fa-user-plus" aria-hidden="true"></i> Register</a></li>
             {% endif %}
 	        </ul>
 	      </div>
@@ -87,9 +86,9 @@
 	  </nav>
     <!-- END nav -->
 	{% block content %}{% endblock %}
-    
 
-		
+
+
     <footer class="ftco-footer ftco-bg-dark ftco-section">
       <div class="container">
         <div class="row mb-5">
@@ -106,7 +105,7 @@
             </div>
           </div>
           <div class="col-md-6 col-lg-3">
-            
+
           </div>
           <div class="col-md-6 col-lg-3">
             <div class="ftco-footer-widget mb-5 ml-md-4">
@@ -143,14 +142,14 @@
           <div class="col-md-12 text-center">
 
             <p><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-  Copyright &copy;<script>document.write(new Date().getFullYear());</script> Developed & Maintained by <a href="http://gieitech.tk" target="_blank">GIEITech</a>
+  Copyright &copy;<script>document.write(new Date().getFullYear());</script> Developed & Maintained by <a href="http://gieitech.com" target="_blank">GIEITech</a>
   <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></p>
           </div>
         </div>
       </div>
     </footer>
-    
-  
+
+
 
   <!-- loader -->
   <div id="ftco-loader" class="show fullscreen"><svg class="circular" width="48px" height="48px"><circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee"/><circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#F96D00"/></svg></div>
@@ -172,7 +171,7 @@
   <script src="js/google-map.js"></script> {% endcomment %}
   <script src="{% static 'Website/js/main.js' %}"></script>
   {% block custom_script %}{% endblock %}
-  
+
   <!-- REACT ZONE -->
   <!-- CDN LINKS -->
   <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
@@ -181,7 +180,7 @@
 
   <!-- NPM packages-->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.0/axios.min.js" integrity="sha256-S1J4GVHHDMiirir9qsXWc8ZWw74PHHafpsHp5PXtjTs=" crossorigin="anonymous"></script>
-  
+
   <!-- IMPORTING COMPONENTS-->
   <script src='{% static "react/js/components/Loader.js" %}' type='text/babel'></script>
   <script src='{% static "react/js/components/Examspace.js" %}' type='text/babel'></script>

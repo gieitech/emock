@@ -14,7 +14,7 @@ class ReportCard extends Component{
             backgroundColor:'rgba(204, 41, 54, 0.66)',
             padding:'2em',
             borderRadius:'2em',
-            
+
         },
         quiz_image: {
             height:'6em',
@@ -31,20 +31,20 @@ class ReportCard extends Component{
         const {quiz} = Report;
         return(
             <div className='report-card'>
-                <img src='https://ik.imagekit.io/zcpzsm6qt/galaxyguide/IMG-20190726-WA0004_C81SsuVBmL.jpg' alt='galaxyguide' className='hero-image'/>
+                <img src='https://images.unsplash.com/photo-1463171379579-3fdfb86d6285?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80' alt='gieitech mocktest' className='hero-image'/>
                 <div className='report-data' style={report_data}>
                     <Row>
                         <Col lg={12}>
                             <img src={quiz.cover_image_url} alt={quiz.name}  style={quiz_image} />
-                            
+
                             <h2 className='text-center' style={{color:'#fff'}}><i className="fa fa-database" aria-hidden="true"></i> {quiz.name}</h2>
-                            
+
                             <h4 className='text-center' style={{color:'#fff'}}><i className="fa fa-calendar-check-o" aria-hidden="true"></i> {Report.submission_date}</h4>
                             <h4 className='text-center' style={{color:'#fff'}}><i className="fa fa-clock-o" aria-hidden="true"></i> {Report.submission_time}</h4>
                             <Table striped bordered hover className='text-center' style={{color:'#fff'}}>
                                 <thead>
                                     <tr>
-                                        
+
                                         <th>Answered</th>
                                         <th>Correct</th>
                                         <th>Gained Marks</th>
@@ -52,7 +52,7 @@ class ReportCard extends Component{
                                 </thead>
                                 <tbody>
                                     <tr>
-                                        
+
                                         <td>{Report.answered}</td>
                                         <td>{Report.correct}</td>
                                         <td>{Report.gained_marks}</td>
@@ -60,7 +60,7 @@ class ReportCard extends Component{
                                 </tbody>
                             </Table>
                         </Col>
-                        
+
                     </Row>
                     <Row>
                         <Col lg={12}>
